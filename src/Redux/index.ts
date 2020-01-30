@@ -6,7 +6,7 @@ import rootReducer from './rootReducer';
 import { rootSaga } from '~/Saga';
 
 export interface AppState {
-  movie: MovieState;
+  movieReducer: MovieState;
 }
 
 export function createAppStore() {

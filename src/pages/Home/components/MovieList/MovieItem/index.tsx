@@ -1,23 +1,23 @@
 import * as React from 'react';
 
 import { Container } from './styles';
+import { Movie } from '~/Redux/Movie/types';
 
 interface Props {
-	title: string;
-	year: string;
-	rate: string;
+	movie: Movie;
 }
 
-function MovieItem({ title, year, rate }: Props) {
+function MovieItem({ movie }: Props) {
+	const { poster, title, year, imdbRating } = movie;
 	return (
 		<Container>
 			<img
-				src="https://m.media-amazon.com/images/M/MV5BYzUzOTA5ZTMtMTdlZS00MmQ5LWFmNjEtMjE5MTczN2RjNjE3XkEyXkFqcGdeQXVyNTc2ODIyMzY@._V1_SX300.jpg"
-				alt="Matrix"
+				src={poster}
+				alt={title}
 			/>
 			<strong>{`Título: ${title}`}</strong>
 			<span>{`Ano: ${year}`}</span>
-			<span>{`Nota IMDB: ${rate}`}</span>
+			<span>{`Nota IMDB: ${imdbRating}`}</span>
 		</Container>
 	);
 }

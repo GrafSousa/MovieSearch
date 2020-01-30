@@ -3,11 +3,18 @@ import { ActionsUnion } from '~/Shared/actionHelper';
 
 import { Movie, MovieTypes } from './types';
 
-export const MovieRetrieveAllActionCreators = {
-	movieRetrieveAllRequest: () => action(MovieTypes.MOVIE_RETRIEVE_ALL_REQUEST),
-	movieRetrieveAllSuccess: (response: Movie[]) => action(MovieTypes.MOVIE_RETRIEVE_ALL_SUCCESS, response),
-	movieRetrieveAllFailure: () => action(MovieTypes.MOVIE_RETRIEVE_ALL_FAILURE),
+export const MovieRetrieveOneByNameActionCreators = {
+	movieRetrieveOneByNameRequest: (movieName: string) => action(
+		MovieTypes.MOVIE_RETRIEVE_ONE_BY_NAME_REQUEST, movieName,
+	),
+	movieRetrieveOneByNameSuccess: (response: Movie) => action(
+		MovieTypes.MOVIE_RETRIEVE_ONE_BY_NAME_SUCCESS, response,
+	),
+	movieRetrieveOneByNameFailure: (errorMsg: string) => action(
+		MovieTypes.MOVIE_RETRIEVE_ONE_BY_NAME_FAILURE, errorMsg,
+	),
 };
 
-export type MovieRetrieveAllActions = ActionsUnion<typeof MovieRetrieveAllActionCreators>;
-export type MovieActions = MovieRetrieveAllActions;
+export type movieRetrieveOneByNameActions =
+	ActionsUnion<typeof MovieRetrieveOneByNameActionCreators>;
+export type MovieActions = movieRetrieveOneByNameActions;

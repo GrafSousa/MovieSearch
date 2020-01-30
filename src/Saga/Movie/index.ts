@@ -1,16 +1,33 @@
 import { call, put } from 'redux-saga/effects';
 import { api } from '~/services/api';
 
-import { MovieRetrieveAllActionCreators } from '~/Redux/Movie/actions';
+import { MovieRetrieveOneByNameActionCreators } from '~/Redux/Movie/actions';
+import { Movie } from '~/Redux/Movie/types';
 
-export function* movieRetrieveAllSaga(
-	_: ReturnType<typeof MovieRetrieveAllActionCreators.movieRetrieveAllSuccess>,
+const apikey = 'apikey=e63a8918';
+
+export function* movieRetrieveOneByNameSaga(
+	action: ReturnType<typeof MovieRetrieveOneByNameActionCreators.movieRetrieveOneByNameSuccess>,
 ) {
-	try {
-		const response = yield call(api.get, '?t=Matrix&apikey=e63a8918');
+	const response = yield call(api.get, `?t=${action.payload}&${apikey}`);
 
-		yield put(MovieRetrieveAllActionCreators.movieRetrieveAllSuccess(response));
-	} catch (err) {
-		yield put(MovieRetrieveAllActionCreators.movieRetrieveAllFailure());
+	if (response.data.Response === 'False') {
+		yield put(
+			MovieRetrieveOneByNameActionCreators.movieRetrieveOneByNameFailure(response.data.Error),
+		);
+	} else {
+		const movie: Movie = convertResponseToMovie(response);
+		yield put(MovieRetrieveOneByNameActionCreators.movieRetrieveOneByNameSuccess(movie));
 	}
+}
+
+function convertResponseToMovie(response: any): Movie {
+	const { imdbID, Title, Year, imdbRating, Poster } = response.data;
+	return {
+		imdbID,
+		title: Title,
+		year: Year,
+		poster: Poster,
+		imdbRating,
+	} as Movie;
 }

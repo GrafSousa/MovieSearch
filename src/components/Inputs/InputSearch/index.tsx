@@ -6,7 +6,7 @@ import { PrimaryButton } from '~/components/Buttons/PrimaryButton';
 interface Props {
 	placeholder: string;
 	isLoading: boolean
-	onChange: (event: React.ChangeEvent<any>) => void;
+	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void | undefined;
 }
 

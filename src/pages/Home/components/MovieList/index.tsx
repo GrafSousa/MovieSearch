@@ -2,32 +2,19 @@ import * as React from 'react';
 
 import { Container } from './styles';
 import { MovieItem } from './MovieItem/index';
+import { Movie } from '~/Redux/Movie/types';
 
+interface Props {
+	movies: Movie[];
+}
 
-function MovieList() {
+function MovieList({ movies }: Props) {
 	return (
 		<>
 			<Container>
-				<MovieItem
-					title="Título"
-					year="Ano"
-					rate="Nota IMDB"
-				/>
-				<MovieItem
-					title="Título"
-					year="Ano"
-					rate="Nota IMDB"
-				/>
-				<MovieItem
-					title="Título"
-					year="Ano"
-					rate="Nota IMDB"
-				/>
-				<MovieItem
-					title="Título"
-					year="Ano"
-					rate="Nota IMDB"
-				/>
+				{movies.map((movie) => (
+					<MovieItem key={movie.imdbID} movie={movie} />
+				))}
 			</Container>
 		</>
 	);
