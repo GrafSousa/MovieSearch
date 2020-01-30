@@ -1,7 +1,21 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import { darken } from 'polished';
 
-export const Button = styled.button`
+interface ButtonProps {
+	isLoading: boolean;
+}
+
+const rotate = keyframes`
+	from {
+		transform: rotate(0deg);
+	}
+	
+	to {
+		transform: rotate(360deg);
+	}
+`;
+
+export const Button = styled.button<ButtonProps>`
   background: #7159c1;
   border: 0;
   padding: 0 32px;
@@ -13,4 +27,11 @@ export const Button = styled.button`
 	&:hover {
 		background: ${darken(0.03, '#7159c1')};
 	}
+
+	${(props) => props.isLoading
+		&& css`
+        svg {
+          animation: ${rotate} 2s linear infinite;
+        }
+      `}
 `;
