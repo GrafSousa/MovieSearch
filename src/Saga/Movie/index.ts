@@ -1,5 +1,6 @@
 import { call, put } from 'redux-saga/effects';
-import { api } from '~/services/api';
+import { toast } from 'react-toastify';
+import { api } from '~/Services/api';
 
 import { MovieRetrieveOneByNameActionCreators } from '~/Redux/Movie/actions';
 import { Movie } from '~/Redux/Movie/types';
@@ -12,6 +13,7 @@ export function* movieRetrieveOneByNameSaga(
 	const response = yield call(api.get, `?t=${action.payload}&${apikey}`);
 
 	if (response.data.Response === 'False') {
+		toast.error(response.data.Error);
 		yield put(
 			MovieRetrieveOneByNameActionCreators.movieRetrieveOneByNameFailure(response.data.Error),
 		);

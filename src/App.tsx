@@ -1,4 +1,5 @@
 import React from 'react';
+import { ToastContainer } from 'react-toastify';
 import { Provider } from 'react-redux';
 
 import { Home } from './pages/Home';
@@ -11,8 +12,9 @@ function App() {
 	return (
 		<>
 			<Provider store={store}>
-				<GlobalStyle />
 				<Home />
+				<GlobalStyle />
+				<ToastContainer autoClose={3000} />
 			</Provider>
 		</>
 	);
