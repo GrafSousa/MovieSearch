@@ -23,6 +23,7 @@ module.exports = {
   },
   plugins: ['react', 'import', 'jsx-a11y'],
   rules: {
+    "object-curly-newline": 0,
     "react/jsx-indent-props": [2, "tab"],
     "react/jsx-indent": [2, "tab"],
     "indent": [2, "tab"],
@@ -34,6 +35,16 @@ module.exports = {
       },
     ],
     'import/prefer-default-export': 'off',
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+		],
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-member-accessibility': 'off'
   },
