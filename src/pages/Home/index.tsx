@@ -5,21 +5,15 @@ import { Container } from './styles';
 import { MovieList } from './components/MovieList';
 import { InputSearch } from '~/components/Inputs/InputSearch';
 import { MovieRetrieveOneByNameActionCreators } from '~/Redux/Movie/actions';
-import { AppState } from '~/Redux';
+import { MovieRetrieveSelector } from '~/Redux/Movie/selectors';
 
 function Home() {
 	const dispatch = useDispatch();
 	const [movieName, setMovieName] = React.useState('');
 
-	const movies = useSelector((appState: AppState) => {
-		const { movieReducer: { data } } = appState;
-		return data;
-	});
+	const movies = useSelector(MovieRetrieveSelector.selectMovieRetrieve);
 
-	const isLoading = useSelector((appState: AppState) => {
-		const { movieReducer: { loading } } = appState;
-		return loading;
-	});
+	const isLoading = useSelector(MovieRetrieveSelector.selectIsLoadingRetrieve);
 
 	function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
 		setMovieName(event.target.value);

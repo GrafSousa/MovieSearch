@@ -1,26 +1,29 @@
-import { MovieActions } from './actions';
-import { MovieTypes, MovieState } from './types';
+import { MovieActions } from '~/Redux/Movie/actions';
+import { MovieTypes, MovieState, Movie } from '~/Redux/Movie/types';
 
-const initialState: MovieState = {
+export interface MovieRetrieveState extends MovieState {
+  readonly data: Movie[];
+}
+
+const initialState: MovieRetrieveState = {
 	data: [],
-	loading: false,
+	isLoading: false,
 	hasDone: false,
 	hasError: false,
 	errorMsg: '',
 };
 
-
-export function movieReducer(
+export function movieRetrieveReducer(
 	state = initialState,
 	action: MovieActions,
-): MovieState {
+): MovieRetrieveState {
 	switch (action.type) {
 	case MovieTypes.MOVIE_RETRIEVE_ONE_BY_NAME_REQUEST:
-		return { ...state, loading: true };
+		return { ...state, isLoading: true };
 	case MovieTypes.MOVIE_RETRIEVE_ONE_BY_NAME_SUCCESS:
 		return {
 			...state,
-			loading: false,
+			isLoading: false,
 			hasDone: true,
 			hasError: false,
 			data: [...state.data, action.payload],
@@ -28,7 +31,7 @@ export function movieReducer(
 	case MovieTypes.MOVIE_RETRIEVE_ONE_BY_NAME_FAILURE:
 		return {
 			...state,
-			loading: false,
+			isLoading: false,
 			hasDone: true,
 			hasError: true,
 			errorMsg: action.payload,

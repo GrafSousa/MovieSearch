@@ -13,8 +13,7 @@ export interface Movie {
 }
 
 export interface MovieState {
-  readonly data: Movie[];
-  readonly loading: boolean;
+  readonly isLoading: boolean;
   readonly hasDone: boolean;
   readonly hasError: boolean;
   readonly errorMsg: string;

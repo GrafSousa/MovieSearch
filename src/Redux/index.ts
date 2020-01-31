@@ -1,13 +1,15 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { MovieState } from './Movie/types';
-
-import rootReducer from './rootReducer';
 import { rootSaga } from '~/Saga';
+import { MovieCrudState, crudMovieReducer } from './Movie';
 
 export interface AppState {
-  movieReducer: MovieState;
+  movie: MovieCrudState;
 }
+
+export const reducers = combineReducers<AppState>({
+	movie: crudMovieReducer,
+});
 
 export function createAppStore() {
 	const sagaMiddleware = createSagaMiddleware();
@@ -19,7 +21,7 @@ export function createAppStore() {
 	composeEnhancers = w.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 	const store = createStore(
-		rootReducer,
+		reducers,
 		composeEnhancers(applyMiddleware(sagaMiddleware)),
 	);
 
