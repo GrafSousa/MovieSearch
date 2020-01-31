@@ -2,24 +2,24 @@ import { call, put } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 import { api } from '~/Services/api';
 
-import { MovieRetrieveOneByNameActionCreators } from '~/Redux/Movie/actions';
+import { MovieRetrieveAllByNameActionCreators } from '~/Redux/Movie/actions';
 import { Movie } from '~/Redux/Movie/types';
 
-const apikey = 'apikey=e63a8918';
+const url = 'search/movie?';
 
-export function* movieRetrieveOneByNameSaga(
-	action: ReturnType<typeof MovieRetrieveOneByNameActionCreators.movieRetrieveOneByNameSuccess>,
+export function* MovieRetrieveAllByNameSaga(
+	action: ReturnType<typeof MovieRetrieveAllByNameActionCreators.movieRetrieveAllByNameSuccess>,
 ) {
-	const response = yield call(api.get, `?t=${action.payload}&${apikey}`);
+	const response = yield call(api.get, `${url}api_key=${process.env.REACT_APP_API_KEY}&query=${action.payload}`);
 
 	if (response.data.Response === 'False') {
 		toast.error(response.data.Error);
 		yield put(
-			MovieRetrieveOneByNameActionCreators.movieRetrieveOneByNameFailure(response.data.Error),
+			MovieRetrieveAllByNameActionCreators.movieRetrieveAllByNameFailure(response.data.Error),
 		);
 	} else {
 		const movie: Movie = convertResponseToMovie(response);
-		yield put(MovieRetrieveOneByNameActionCreators.movieRetrieveOneByNameSuccess(movie));
+		yield put(MovieRetrieveAllByNameActionCreators.movieRetrieveAllByNameSuccess(movie));
 	}
 }
 

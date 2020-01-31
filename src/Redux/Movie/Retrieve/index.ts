@@ -18,9 +18,9 @@ export function movieRetrieveReducer(
 	action: MovieActions,
 ): MovieRetrieveState {
 	switch (action.type) {
-	case MovieTypes.MOVIE_RETRIEVE_ONE_BY_NAME_REQUEST:
+	case MovieTypes.MOVIE_RETRIEVE_ALL_BY_NAME_REQUEST:
 		return { ...state, isLoading: true };
-	case MovieTypes.MOVIE_RETRIEVE_ONE_BY_NAME_SUCCESS:
+	case MovieTypes.MOVIE_RETRIEVE_ALL_BY_NAME_SUCCESS:
 		return {
 			...state,
 			isLoading: false,
@@ -28,7 +28,7 @@ export function movieRetrieveReducer(
 			hasError: false,
 			data: [...state.data, action.payload],
 		};
-	case MovieTypes.MOVIE_RETRIEVE_ONE_BY_NAME_FAILURE:
+	case MovieTypes.MOVIE_RETRIEVE_ALL_BY_NAME_FAILURE:
 		return {
 			...state,
 			isLoading: false,

@@ -4,7 +4,7 @@ import { Container } from './styles';
 
 import { MovieList } from './components/MovieList';
 import { InputSearch } from '~/components/Inputs/InputSearch';
-import { MovieRetrieveOneByNameActionCreators } from '~/Redux/Movie/actions';
+import { MovieRetrieveAllByNameActionCreators } from '~/Redux/Movie/actions';
 import { MovieRetrieveSelector } from '~/Redux/Movie/selectors';
 
 function Home() {
@@ -20,7 +20,7 @@ function Home() {
 	}
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-		dispatch(MovieRetrieveOneByNameActionCreators.movieRetrieveOneByNameRequest(movieName));
+		dispatch(MovieRetrieveAllByNameActionCreators.movieRetrieveAllByNameRequest(movieName));
 		setMovieName('');
 	}
 	return (
