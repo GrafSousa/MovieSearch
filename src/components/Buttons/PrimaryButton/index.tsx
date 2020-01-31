@@ -5,7 +5,7 @@ import { Button } from './styles';
 
 interface Props {
 	isLoading: boolean;
-	onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void | undefined;
+	onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void | undefined;
 }
 
 function PrimaryButton({ onClick, isLoading }: Props) {

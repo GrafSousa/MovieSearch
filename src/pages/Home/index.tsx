@@ -18,17 +18,21 @@ function Home() {
 	function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
 		setMovieName(event.target.value);
 	}
-	function handleClick(_: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+		event.preventDefault();
 		dispatch(MovieRetrieveOneByNameActionCreators.movieRetrieveOneByNameRequest(movieName));
+		setMovieName('');
 	}
 	return (
 		<>
-			<InputSearch
-				placeholder="Digite o nome do filme"
-				isLoading={isLoading}
-				onChange={handleChange}
-				onClick={handleClick}
-			/>
+			<form onSubmit={handleSubmit}>
+				<InputSearch
+					value={movieName}
+					isLoading={isLoading}
+					onChange={handleChange}
+					placeholder="Digite o nome do filme"
+				/>
+			</form>
 			<Container>
 				<MovieList
 					movies={movies}
